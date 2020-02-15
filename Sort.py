@@ -5,14 +5,6 @@ def get_random_numbers(n, maxim=10 ** 6, mini=0):
     return [int(random() * maxim) for _ in range(n)]
 
 
-def quick_sort(arr):
-    pass
-
-
-def heap_sort(arr):
-    pass
-
-
 def bubble_sort(arr):
     if len(arr) < 2:
         return arr
@@ -74,6 +66,49 @@ def merge_sort(arr, low=0, hi=None):
     return arr
 
 
+def heapify(arr, i):
+    ridx = (2 * i + 2)
+    lidx = (2 * i + 1)
+
+    if ridx < len(arr):
+        r = arr[ridx]
+        l = arr[lidx]
+        m = arr[i]
+
+        if m > r or m > l:
+            if l > r:
+                arr[i] = r
+                arr[ridx] = m
+                heapify(arr, ridx)
+            else:
+                arr[i] = l
+                arr[lidx] = m
+                heapify(arr, lidx)
+    elif lidx < len(arr):
+        l = arr[lidx]
+        m = arr[i]
+        if m > l:
+            arr[i] = l
+            arr[lidx] = m
+
+
+def heap_sort(arr):
+    narr = []
+    for i in reversed(range(len(arr))):
+        heapify(arr, i)
+    while arr:
+        narr.append(arr[0])
+        tmp = arr.pop()
+        if arr:
+            arr[0] = tmp
+            heapify(arr, 0)
+    return narr
+
+
+def quick_sort(arr):
+    pass
+
+
 if __name__ == '__main__':
     # n^2 sorting algorithms
     numbers = get_random_numbers(10 ** 3)
@@ -83,3 +118,4 @@ if __name__ == '__main__':
     # n*log(n) sorting algorithms
     numbers = get_random_numbers(10 ** 5)
     print(merge_sort(numbers.copy()))
+    print(heap_sort(numbers.copy()))
