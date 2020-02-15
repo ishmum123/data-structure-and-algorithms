@@ -1,8 +1,6 @@
 from random import random
 
-
-def get_random_numbers(n, maxim=10 ** 6, mini=0):
-    return [int(random() * maxim) for _ in range(n)]
+from Utils import get_random_numbers, measure
 
 
 def bubble_sort(arr):
@@ -112,10 +110,10 @@ def quick_sort(arr):
 if __name__ == '__main__':
     # n^2 sorting algorithms
     numbers = get_random_numbers(10 ** 3)
-    print(insertion_sort(numbers.copy()))
-    print(bubble_sort(numbers.copy()))
+    measure(lambda: print(insertion_sort(numbers.copy())))
+    measure(lambda: print(bubble_sort(numbers.copy())))
 
     # n*log(n) sorting algorithms
     numbers = get_random_numbers(10 ** 5)
-    print(merge_sort(numbers.copy()))
-    print(heap_sort(numbers.copy()))
+    measure(lambda: print(merge_sort(numbers.copy())))
+    measure(lambda: print(heap_sort(numbers.copy())))
